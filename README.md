@@ -219,3 +219,124 @@ Example HTML linking an external CSS file:
 ```
 
 ---
+
+
+**Specificity** in CSS is a set of rules that determines which CSS styles are applied to an element when multiple conflicting rules target the same element. When more than one rule applies to the same element, **specificity** decides which one will take precedence.
+
+### **How Specificity Works**
+
+Specificity is calculated based on the type of selectors used in the rule. CSS assigns different weights to different kinds of selectors. The more specific a selector is, the higher its specificity value, and the more likely it is to override other rules.
+
+### **Understanding Specificity Values**
+
+CSS specificity is usually represented in a 4-part value, often written as `(a, b, c, d)`, where each letter represents a different type of selector. Let’s break it down:
+
+1. **a (ID selectors)**: The number of `#id` selectors in the rule.
+2. **b (Class selectors, attribute selectors, pseudo-classes)**: The number of `.class`, `[attribute]`, or `:pseudo-class` selectors.
+3. **c (Type selectors, pseudo-elements)**: The number of element type selectors (e.g., `div`, `p`, `h1`) and pseudo-elements (e.g., `::before`, `::after`).
+4. **d (Inline styles)**: The presence of inline styles, added directly to an element with the `style` attribute, has the highest specificity.
+
+When two or more CSS rules target the same element, the rule with the highest specificity is applied. If two rules have the same specificity, the **last one in the code** takes precedence.
+
+### **Specificity Calculation Example**
+
+Let’s consider a few examples to calculate specificity:
+
+```css
+/* Example 1: Simple element selector */
+p {
+    color: blue;
+}
+```
+- Specificity: `(0, 0, 1, 0)`
+  - There is 1 element selector (`p`), no ID, no class, and no inline styles.
+
+```css
+/* Example 2: Class selector */
+p.example {
+    color: red;
+}
+```
+- Specificity: `(0, 1, 1, 0)`
+  - There is 1 element selector (`p`) and 1 class selector (`.example`).
+
+```css
+/* Example 3: ID selector */
+#main {
+    color: green;
+}
+```
+- Specificity: `(1, 0, 0, 0)`
+  - There is 1 ID selector (`#main`), no class, and no element selectors.
+
+```css
+/* Example 4: Inline style */
+<p style="color: yellow;">
+```
+- Specificity: `(1, 0, 0, 0)`
+  - Inline styles always have the highest specificity.
+
+---
+
+### **Hierarchy of Selectors (from Least to Most Specific)**
+
+1. **Element (Type) Selector**: Low specificity. Matches elements by their tag name.
+   - Example: `div`, `p`, `h1`
+   - Specificity: `(0, 0, 1, 0)`
+
+2. **Class Selector**: More specific than an element selector. Matches elements with a class attribute.
+   - Example: `.container`, `.example`
+   - Specificity: `(0, 1, 0, 0)`
+
+3. **ID Selector**: Highly specific. Matches elements with a specific ID attribute.
+   - Example: `#main`, `#header`
+   - Specificity: `(1, 0, 0, 0)`
+
+4. **Inline Styles**: Styles applied directly to an element in the HTML via the `style` attribute.
+   - Example: `<p style="color: yellow;">`
+   - Specificity: `(1, 0, 0, 0)`
+
+---
+
+### **Specificity Examples in Practice**
+
+Let’s look at how specificity works in practice:
+
+```html
+<p id="intro" class="text">Hello World!</p>
+```
+
+```css
+/* Example CSS */
+p {
+    color: blue; /* Specificity: (0, 0, 1, 0) */
+}
+
+.text {
+    color: red; /* Specificity: (0, 1, 0, 0) */
+}
+
+#intro {
+    color: green; /* Specificity: (1, 0, 0, 0) */
+}
+
+p#intro {
+    color: yellow; /* Specificity: (1, 0, 1, 0) */
+}
+
+p {
+    color: black !important; /* Overrides other rules due to !important */
+}
+```
+
+1. **First Rule** (`p { color: blue; }`):
+   - This is an element selector, so the specificity is `(0, 0, 1, 0)`.
+   
+2. **Second Rule** (`.text { color: red; }`):
+   - This is a class selector, so the specificity is `(0, 1, 0, 0)`. It’s more specific than the first rule, so the paragraph’s color would become **red**.
+
+3. **Third Rule** (`#intro { color: green; }`):
+   - This is an ID selector, so the specificity is `(1, 0, 0, 0)`. It is more specific than the class or element selectors, so the paragraph’s color would become **green**.
+
+4. **Fourth Rule** (`p#intro { color: yellow; }`):
+   - This is a combination of an element selector and an ID selector, giving it a specificity of `(1, 
