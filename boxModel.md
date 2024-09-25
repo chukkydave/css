@@ -227,3 +227,146 @@ Once finished, modify the box model by changing padding, margins, and borders to
 
 ---
 
+The previous CSS box model notes do cover many of the fundamental topics, but they do not explicitly address some of the advanced topics you've listed. Here's a breakdown of the missing or less covered topics with additional notes for completeness:
+
+---
+
+Extras
+
+### **1. The Display Property**
+
+The **display** property controls how an element is displayed in the document. Common values include:
+
+- `block`: Takes up the full width available (e.g., `<div>`).
+- `inline`: Does not start on a new line and takes only the necessary width (e.g., `<span>`).
+- `inline-block`: Combines the features of block and inline elements.
+
+Example:
+
+```html
+.block {
+  display: block;
+}
+.inline {
+  display: inline;
+}
+```
+
+---
+
+### **2. Display: None**
+
+The **`display: none`** property hides an element completely from the layout, meaning it is removed from the document flow.
+
+Example:
+
+```html
+.hidden {
+  display: none;
+}
+```
+
+---
+
+### **3. Negative Margin & Margin Auto**
+
+- **Negative Margins**: Shrinks the space around the element, moving it closer to other elements.
+
+Example:
+
+```html
+.negative {
+  margin-top: -10px;
+}
+```
+
+- **Margin Auto**: Automatically centers block-level elements horizontally if a fixed width is set.
+
+Example:
+
+```html
+.centered {
+  width: 50%;
+  margin: 0 auto;
+}
+```
+
+---
+
+
+
+### **4. Min and Max Width**
+
+- **min-width**: Sets the minimum width an element can have.
+- **max-width**: Limits the maximum width.
+
+Example:
+
+```html
+div {
+  min-width: 100px;
+  max-width: 500px;
+}
+```
+
+---
+
+### **5. Rounding Elements With Border Radius**
+
+The **border-radius** property rounds the corners of an element. You can control each corner individually or set all corners at once.
+
+Example:
+
+```html
+.rounded {
+  border-radius: 10px;
+}
+```
+
+---
+
+### **6. Box Shadows**
+
+The **box-shadow** property adds shadow effects around an element.
+
+Example:
+
+```html
+.shadow {
+  box-shadow: 5px 5px 10px grey;
+}
+```
+
+---
+
+### **7. Working With Overflow**
+
+The **overflow** property controls what happens when the content overflows the element’s box. Common values include:
+
+- `visible`: The overflow is not clipped, and the content renders outside the element’s box.
+- `hidden`: The overflow is clipped, and the rest is not visible.
+- `scroll`: The overflow is clipped, but scrollbars are added.
+
+Example:
+
+```html
+.overflow {
+  width: 200px;
+  height: 100px;
+  overflow: scroll;
+}
+```
+
+---
+
+### **Classwork**
+
+**Create a card component** that includes:
+
+1. A fixed width and height with `min-width` and `max-width`.
+2. A box shadow and rounded corners.
+3. Use `margin: auto` to center it.
+4. Experiment with `overflow: hidden` and `overflow: scroll` inside the card.
+5. Add an element with `display: none` and toggle it.
+
+---
